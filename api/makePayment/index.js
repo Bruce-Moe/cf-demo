@@ -4,10 +4,10 @@ const qs = require("qs");
 const teamId = "af3fd80a-475b-4ffa-88ec-20b0f4211db4";
 const channelId =
   "19:AJZciBgKzwb8IK2ugVq9sFXJS7_OkKhEXf4rdsGbCss1@thread.tacv2";
-const subscriptionKey = "21b9a46eebc4481d92fe08f892becd6c";
+const subscriptionKey = "5d383bd8ae444936960c8a52f3eeb19b";
 const paymentsUrl = "https://connect.stripe.com/payments";
 
-module.exports = async function (context, req) {
+module.exports = async function(context, req) {
   const callStripe = async () => {
     var data = qs.stringify({
       amount: "2000",
@@ -16,9 +16,10 @@ module.exports = async function (context, req) {
     });
     var stripeConfig = {
       method: "post",
-      url: "https://cf-bugbash-prodrelease-test-1.preview.int-azure-api.net/stripe/v1/payment_intents",
+      url:
+        "https://cf-bugbash-prodrelease-test-1.preview.int-azure-api.net/stripe/v1/payment_intents",
       headers: {
-        "Ocp-Apim-Subscription-Key": "21b9a46eebc4481d92fe08f892becd6c",
+        "Ocp-Apim-Subscription-Key": subscriptionKey,
         Accept: "application/x-www-form-urlencoded",
         "Content-Type": "application/x-www-form-urlencoded",
       },

@@ -3,10 +3,10 @@ const axios = require("axios");
 const teamId = "af3fd80a-475b-4ffa-88ec-20b0f4211db4";
 const channelId =
   "19:AJZciBgKzwb8IK2ugVq9sFXJS7_OkKhEXf4rdsGbCss1@thread.tacv2";
-const subscriptionKey = "21b9a46eebc4481d92fe08f892becd6c";
+const subscriptionKey = "5d383bd8ae444936960c8a52f3eeb19b";
 const ticketUrl = "https://microsoft519.zendesk.com/agent/tickets";
 
-module.exports = async function (context, req) {
+module.exports = async function(context, req) {
   const callZendesk = async () => {
     var zendeskData = JSON.stringify({
       ticket: {
@@ -20,7 +20,8 @@ module.exports = async function (context, req) {
 
     var zendeskConfig = {
       method: "post",
-      url: "https://cf-bugbash-prodrelease-test-1.preview.int-azure-api.net/zendesk/v2/tickets",
+      url:
+        "https://cf-bugbash-prodrelease-test-1.preview.int-azure-api.net/zendesk/v2/tickets",
       headers: {
         "Ocp-Apim-Subscription-Key": subscriptionKey,
         "Content-Type": "application/json",
