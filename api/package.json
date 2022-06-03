@@ -7,6 +7,8 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "node-fetch": "^3.2.4"
+    "axios": "^0.27.2",
+    "node-fetch": "^3.2.4",
+    "qs": "^6.10.3"
   }
 }
