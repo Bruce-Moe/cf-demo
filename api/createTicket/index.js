@@ -1,11 +1,5 @@
 const axios = require("axios");
 
-const teamId = "af3fd80a-475b-4ffa-88ec-20b0f4211db4";
-const channelId =
-  "19:AJZciBgKzwb8IK2ugVq9sFXJS7_OkKhEXf4rdsGbCss1@thread.tacv2";
-const subscriptionKey = "5d383bd8ae444936960c8a52f3eeb19b";
-const ticketUrl = "https://microsoft8994.zendesk.com/agent/tickets";
-
 module.exports = async function(context, req) {
   const callZendesk = async () => {
     var zendeskData = JSON.stringify({
@@ -20,10 +14,9 @@ module.exports = async function(context, req) {
 
     var zendeskConfig = {
       method: "post",
-      url:
-        "https://cf-bugbash-prodrelease-test-1.preview.int-azure-api.net/zendesk/v2/tickets",
+      url: `${process.env.ApiURL}/zendesk/v2/tickets`,
       headers: {
-        "Ocp-Apim-Subscription-Key": subscriptionKey,
+        "Ocp-Apim-Subscription-Key": process.env.SubscriptionKey,
         "Content-Type": "application/json",
       },
       data: zendeskData,
@@ -34,7 +27,7 @@ module.exports = async function(context, req) {
   const callTeams = async (data) => {
     const message = `
       New Ticket Created | Subject: "${data.ticket.subject}" | 
-      Comments: "${data.ticket.description}" | Priority: ${data.ticket.priority} | <a href=${ticketUrl}/${data.ticket.id}> View in web </a>
+      Comments: "${data.ticket.description}" | Priority: ${data.ticket.priority} | <a href=${process.env.TicketUrl}/${data.ticket.id}> View in web </a>
     `;
     var teamsData = JSON.stringify({
       body: {
@@ -44,14 +37,14 @@ module.exports = async function(context, req) {
     });
     var teamsConfig = {
       method: "post",
-      url: `https://cf-bugbash-prodrelease-test-1.preview.int-azure-api.net/teams/teams/${teamId}/channels/${channelId}/messages`,
+      url: `${process.env.ApiURL}/teams/teams/${process.env.TeamId}/channels/${process.env.ChannelId}/messages`,
       headers: {
         "Content-Type": "application/json",
-        "Ocp-Apim-Subscription-Key": subscriptionKey,
+        "Ocp-Apim-Subscription-Key": process.env.SubscriptionKey,
       },
       data: teamsData,
     };
-    return axios(teamsConfig);
+    return axios(teamsConfig).catch((e) => context.log(e.message));
   };
 
   var ticketId;
