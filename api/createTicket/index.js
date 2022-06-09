@@ -27,7 +27,7 @@ module.exports = async function(context, req) {
   const callTeams = async (data) => {
     const message = `
       New Ticket Created | Subject: "${data.ticket.subject}" | 
-      Comments: "${data.ticket.description}" | Priority: ${data.ticket.priority} | <a href=${process.env.TicketUrl}/${data.ticket.id}> View in web </a>
+      Comments: "${data.ticket.description}" | Priority: ${data.ticket.priority} | <a href=${process.env.TicketURL}/${data.ticket.id}> View in web </a>
     `;
     var teamsData = JSON.stringify({
       body: {
